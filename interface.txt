@@ -9,11 +9,13 @@ procedure solve(n, m) callbacks {
 }
 
 main {
-    read n, m, choice;
+    read choice;
     if choice {
+        read n, m;
         call res = is_solvable(m, n);
         write res;
     } else {
+        read n, m;
         call solve(n, m);
     }
 }

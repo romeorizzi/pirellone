@@ -14,6 +14,7 @@ def random_pirellone(n, m, solvable=False):
             pirellone.append(inv[:])
     return pirellone
 
+
 def is_solvable(pirellone, n, m):
     for i in range(n):
         inv = pirellone[0][0] != pirellone[i][0]
@@ -29,11 +30,15 @@ def print_pirellone(pirellone):
         print(*l)
 
 
-def eval_is_solvable(n, m):
+def eval_is_solvable(n, m, solvable=False):
     print(f"Checking if solvable {n}x{m}")
-    pirellone = random_pirellone(n, m)
+    pirellone = random_pirellone(n, m, solvable=solvable)
 
+    read = [[False for j in range(m + 1)] for i in range(n + 1)]
     def is_on(i, j):
+        if read[i][j]:
+            ta.goals["decision_no_double_read"] = False
+        read[i][j] = True
         p.check(1 <= i <= n, "row index out of range")
         p.check(1 <= j <= m, "column index out of range")
         return pirellone[i - 1][j - 1]
@@ -58,7 +63,17 @@ def eval_solve(n, m):
 
     pirellone = random_pirellone(n, m, solvable=True)
 
+    count = 0
+    read = [[False for j in range(m + 1)] for i in range(n + 1)]
     def is_on(i, j):
+        nonlocal count 
+        if read[i][j]:
+            ta.goals["solve_no_double_read"] = False
+        read[i][j] = True
+
+        count += 1
+        if count > n + m - 1:
+            ta.goals["solve_minimum_reads"] = False
         p.check(1 <= i <= n, "row index out of range")
         p.check(1 <= j <= m, "column index out of range")
         return pirellone[i - 1][j - 1]
@@ -82,18 +97,33 @@ def eval_solve(n, m):
         print_pirellone(pirellone)
     else:
         print("Correct!")
+    return solved
 
 
 def main():
-    eval_is_solvable(10, 10)
-    eval_solve(10, 10)
-    eval_is_solvable(50, 50)
-    eval_solve(50, 50)
-    eval_is_solvable(100, 100)
-    eval_solve(100, 100)
-    eval_is_solvable(1000, 1000)
-    eval_solve(1000, 1000)
+    ta.goals.check("decision_exponential", lambda: eval_is_solvable(10, 10))
+    ta.goals.check("decision_exponential", lambda: eval_is_solvable(10, 10, solvable=True))
+    ta.goals.check("solve_exponential", lambda: eval_solve(10, 10))
+    ta.goals.check("decision_exponential", lambda: eval_is_solvable(20, 20))
+    ta.goals.check("decision_exponential", lambda: eval_is_solvable(20, 20, solvable=True))
+    ta.goals.check("solve_exponential", lambda: eval_solve(20, 20))
 
+    ta.goals.check("decision_quadratic", lambda: eval_is_solvable(50, 50))
+    ta.goals.check("decision_quadratic", lambda: eval_is_solvable(50, 50, solvable=True))
+    ta.goals.check("solve_quadratic", lambda: eval_solve(50, 50))
+    ta.goals.check("decision_quadratic", lambda: eval_is_solvable(100, 100))
+    ta.goals.check("decision_quadratic", lambda: eval_is_solvable(100, 100, solvable=True))
+    ta.goals.check("solve_quadratic", lambda: eval_solve(100, 100))
+
+    ta.goals.setdefault("decision_exponential", True)
+    ta.goals.setdefault("solve_exponential", True)
+    ta.goals.setdefault("decision_quadratic", True)
+    ta.goals.setdefault("solve_quadratic", True)
+    ta.goals.setdefault("solve_minimum_reads", True)
+    ta.goals.setdefault("decision_no_double_read", True)
+    ta.goals.setdefault("solve_no_double_read", True)
+
+    print(ta.goals)
 
 
 if __name__ == "__main__":

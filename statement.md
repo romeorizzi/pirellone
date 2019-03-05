@@ -28,15 +28,15 @@ agire. Altrimenti, segnala la situazione di impossibilità.
 
 Per risolvere il problema, dovrai implementare due le seguenti funzioni.
 
-#### `is_solvable(n, m, is_on(row, col))`
+#### `is_solvable(m, n, is_on(row, col))`
 
-Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `n`x`m` sia risolvibile, `false` altrimenti. 
+Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `m`x`n` sia risolvibile, `false` altrimenti. 
 Hai a disposizione la callback `is_on(row, col)`, la quale resituisce `true` se la luce corrispondente alla finestra 
 (`row`, `col`) del pirellone è attualmente accesa, `false` altrimenti.
 
-#### `solve(n, m, is_one(row, col), switch_row(row), switch_col(col))`
+#### `solve(m, n, is_one(row, col), switch_row(row), switch_col(col))`
 
-Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `n` ed `m` indicano la dimensione del 
+Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `m` ed `n` indicano la dimensione del 
 grattacielo, e la callback `is_on(row, col)` ci dice se in quel momento una finestra è illuminata o meno. Chiaramente assumiamo
 che il grattacielo passato a questa funzione ammetta sempre una soluzione. 
 

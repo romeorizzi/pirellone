@@ -1,12 +1,19 @@
 function is_solvable(m, n) callbacks {
-   procedure switch_row(row);
-   procedure switch_col(col);
-   function is_turned_on(row,col);
+   function is_on(row, col);
 }
 
+procedure solve(n, m) callbacks {
+    function is_on(row, col);
+    procedure switch_row(row);
+    procedure switch_col(col);
+}
 
 main {
-    read m, n;
-    call res = is_solvable(m, n);
-    write res;
+    read n, m, choice;
+    if choice {
+        call res = is_solvable(m, n);
+        write res;
+    } else {
+        call solve(n, m);
+    }
 }

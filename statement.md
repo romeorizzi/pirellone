@@ -1,4 +1,6 @@
-Luci al Pirellone (Selezioni nazionali oii 2005 - Milano)
+# Luci al Pirellone 
+
+##### (Selezioni nazionali oii 2005 - Milano)
   
 Il Pirellone è un noto grattacielo di Milano, in cui le
 finestre sono disposte ordinatamente su M righe (piani) e
@@ -22,10 +24,36 @@ Data la configurazione iniziale di luci, il custode deve verificare se sia possi
 speciali e, in tal caso, deve specificare anche su quali interruttori
 agire. Altrimenti, segnala la situazione di impossibilità.
 
-Goal 1: decidere se il Pirellone sia spegnibile o meno, con M,N <= 10
-Goal 2: qualora esista, dara una sequenza di mosse che spenga l'intero Pirellone, con M,N <= 10
-Goal 3 e 4: come 1 e 2, ma con M,N <= 100
-Goal 5 e 6: come 3 e 4, ma ora hai a disposizione solo O(M+N) memoria interna per condurre le operazioni
-Goal 7 e 8: come 3 e 4, ma ora hai a disposizione solo O(1) memoria interna per condurre le operazioni, e la funzione che interroga lo stato di una cella può essere invocata la più una volta per cella.
-Goal 9: come 8, ma devi essere superveloce ed interogare un minimo numero di celle. Tuttavia puoi ora assumere che il Pirellone sia spegnibile. 
+### Funzioni
 
+Per risolvere il problema, dovrai implementare due le seguenti funzioni.
+
+#### `is_solvable(n, m, is_on(row, col))`
+
+Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `n`x`m` sia risolvibile, `false` altrimenti. 
+Hai a disposizione la callback `is_on(row, col)`, la quale resituisce `true` se la luce corrispondente alla finestra 
+(`row`, `col`) del pirellone è attualmente accesa, `false` altrimenti.
+
+#### `solve(n, m, is_one(row, col), switch_row(row), switch_col(col))`
+
+Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `n` ed `m` indicano la dimensione del 
+grattacielo, e la callback `is_on(row, col)` ci dice se in quel momento una finestra è illuminata o meno. Chiaramente assumiamo
+che il grattacielo passato a questa funzione ammetta sempre una soluzione. 
+
+Hai a disposizione le callback `switch_row(row)` e `switch_col(col)`, che rispettivamente azionano l'interruttore di riga e di colonna indicato. Il tuo obbiettivo è chiamare queste funzioni per spegnere tutte le luci del pirellone, chiaramente facendo 
+il minor numero di operazioni possibili. 
+
+**NB**: sebbene ti venga chiesto di implementare le funzioni in un singolo file, fra la valutazione di un goal e l'altro il
+processo viene interrotto. Non funzionerà in sostanza definire variabili globali per condividere dati fra le 
+due funzioni. 
+
+
+### Goals 
+
+Questo problema prevede i seguenti goal, obbiettivi che dovrai raggiungere:
+
+- `decision_exponential`: decidere se il Pirellone sia spegnibile o meno, con M,N <= 10
+- `solve_exponential`: qualora esista, dara una sequenza di mosse che spenga l'intero Pirellone, con M,N <= 10
+- `decision_quadratic` e `solve_exponential`: rispettivamente come i primi due, ma con M,N <= 100
+- `solve_minimum_reads`: implementa la procedura `solve()` effettuando il minor numero possibile di chiamate a `is_on`
+- `decision_no_double_read` e `solve_no_double_read`: implementa le relative funzioni senza chiamare due volte `is_on` con gli stessi parametri

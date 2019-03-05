@@ -29,14 +29,14 @@ Per risolvere il problema, dovrai implementare due le seguenti funzioni.
 #### `is_solvable(n, m, is_on(row, col))`
 
 Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `n`x`m` sia risolvibile, `false` altrimenti. 
-Hai a disposizione la callback `is_on(row, col)` la quale resituisce `true` se la luce corrispondente alla finestra 
+Hai a disposizione la callback `is_on(row, col)`, la quale resituisce `true` se la luce corrispondente alla finestra 
 (`row`, `col`) del pirellone è attualmente accesa, `false` altrimenti.
 
 #### `solve(n, m, is_one(row, col), switch_row(row), switch_col(col))`
 
 Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `n` ed `m` indicano la dimensione del 
-grattacielo, che ovviamente è garantito essere risolvibile, e la callback `is_on(row, col)` ci dice se in quel momento 
-una finestra è illuminata o meno. 
+grattacielo, e la callback `is_on(row, col)` ci dice se in quel momento una finestra è illuminata o meno. Chiaramente assumiamo
+che il grattacielo passato a questa funzione ammetta sempre una soluzione. 
 
 Hai a disposizione le callback `switch_row(row)` e `switch_col(col)`, che rispettivamente azionano l'interruttore di riga e di colonna indicato. Il tuo obbiettivo è chiamare queste funzioni per spegnere tutte le luci del pirellone, chiaramente facendo 
 il minor numero di operazioni possibili. 

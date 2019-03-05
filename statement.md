@@ -42,7 +42,7 @@ Hai a disposizione le callback `switch_row(row)` e `switch_col(col)`, che rispet
 il minor numero di operazioni possibili. 
 
 **NB**: sebbene ti venga chiesto di implementare le funzioni in un singolo file, fra la valutazione di un goal e l'altro il
-processo viene interrotto e fatto ripartire. Non funzionerà in sostanza definire variabili globali per condividere dati fra le 
+processo viene interrotto. Non funzionerà in sostanza definire variabili globali per condividere dati fra le 
 due funzioni. 
 
 

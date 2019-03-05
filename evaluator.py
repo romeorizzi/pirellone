@@ -72,7 +72,7 @@ def eval_is_solvable(n, m, solvable=False):
     return False
 
 def eval_solve(n, m):
-    print(f"Getting solution for {n}x{m}...")
+    print(f"Getting solution for {n}x{m}")
 
     pirellone = random_pirellone(n, m, solvable=True)
 

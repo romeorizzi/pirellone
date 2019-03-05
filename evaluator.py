@@ -1,5 +1,7 @@
 import turingarena as ta 
 import random
+import tempfile 
+
 
 def random_pirellone(n, m, solvable=False):
     if not solvable:
@@ -30,6 +32,15 @@ def print_pirellone(pirellone):
         print(*l)
 
 
+def send_pirellone_file(pirellone):
+    res = ""
+    n, m = len(pirellone), len(pirellone[0])
+    res += f"{n} {m}\n"
+    for row in pirellone:
+        res += " ".join(map(str, row)) + "\n"
+    ta.send_file(res, filename=f"pirellone_{n}_{m}_fail.txt")
+
+
 def eval_is_solvable(n, m, solvable=False):
     print(f"Checking if solvable {n}x{m}")
     pirellone = random_pirellone(n, m, solvable=solvable)
@@ -55,7 +66,9 @@ def eval_is_solvable(n, m, solvable=False):
     else:
         print("You said that the pirellone was not solvable, but it is, take a look")
 
-    print_pirellone(pirellone)
+    if n <= 50:
+        print_pirellone(pirellone)
+    send_pirellone_file(pirellone)
     return False
 
 def eval_solve(n, m):
@@ -94,7 +107,9 @@ def eval_solve(n, m):
     solved = not any(any(pirellone[i][j] for j in range(m)) for i in range(n))
     if not solved:
         print("You didn't turn off all the lights. Take a look")
-        print_pirellone(pirellone)
+        if n <= 50:
+            print_pirellone(pirellone)
+        send_pirellone_file(pirellone)
     else:
         print("Correct!")
     return solved

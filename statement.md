@@ -54,4 +54,4 @@ Questo problema prevede i seguenti goal, obbiettivi che dovrai raggiungere:
 - `solve_exponential`: qualora esista, dara una sequenza di mosse che spenga l'intero Pirellone, con M,N <= 10
 - `decision_quadratic` e `solve_exponential`: rispettivamente come i primi due, ma con M,N <= 100
 - `solve_minimum_reads`: implementa la procedura `solve()` effettuando il minor numero possibile di chiamate a `is_on`
-- `decision_no_double_read` e `solve_no_double_read`: implementa le relativa funzioni senza chiamare due volte `is_on` con gli stessi parametri
+- `decision_no_double_read` e `solve_no_double_read`: implementa le relative funzioni senza chiamare due volte `is_on` con gli stessi parametri

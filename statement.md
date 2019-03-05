@@ -26,7 +26,7 @@ agire. Altrimenti, segnala la situazione di impossibilità.
 
 ### Funzioni
 
-Per risolvere il problema, dovrai implementare due le seguenti funzioni.
+Per risolvere il problema, dovrai implementare le seguenti due funzioni.
 
 #### `is_solvable(m, n, is_on(row, col))`
 

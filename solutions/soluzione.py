@@ -11,7 +11,7 @@ def is_solvable(m, n, is_on):
 
 def solve(m, n, is_on, switch_row, switch_col):
     for j in range(1, n + 1):
-        if is_on(j, 1):
+        if is_on(1, j):
             switch_col(j)
     for i in range(2, m + 1):
         if is_on(i, 1):

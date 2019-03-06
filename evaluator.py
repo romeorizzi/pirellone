@@ -7,14 +7,14 @@ def random_pirellone(n, m, solvable=False):
     line = [random.randint(0, 1) for _ in range(m)]
     inv = [int(not x) for x in line]
     pirellone = []
-    for _ in range(n):
+    for _ in range(n + 1):
         if random.randint(0, 1) == 0:
             pirellone.append(line[:])
         else:
             pirellone.append(inv[:])
     if not solvable:
-        row = random.randint(1, m)
-        col = random.randint(1, n)
+        row = random.randrange(0, m)
+        col = random.randrange(0, n)
         pirellone[row][col] = 1-pirellone[row][col]
     return pirellone
 
@@ -61,7 +61,7 @@ def eval_is_solvable(n, m, solvable=False):
          
     solvable = is_solvable(pirellone, n, m)
     if res == solvable:
-        print("Correct")
+        print("Correct!")
         return True 
     if res:
         print("You said that the pirellone was solvable, but it is not, take a look")

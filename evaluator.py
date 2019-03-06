@@ -7,7 +7,7 @@ def random_pirellone(n, m, solvable=False):
     line = [random.randint(0, 1) for _ in range(m)]
     inv = [int(not x) for x in line]
     pirellone = []
-    for _ in range(n + 1):
+    for _ in range(n):
         if random.randint(0, 1) == 0:
             pirellone.append(line[:])
         else:

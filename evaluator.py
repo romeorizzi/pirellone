@@ -4,8 +4,6 @@ import tempfile
 
 
 def random_pirellone(n, m, solvable=False):
-    if not solvable:
-        return [[random.randint(0, 1) for _ in range(m)] for _ in range(n)]
     line = [random.randint(0, 1) for _ in range(m)]
     inv = [int(not x) for x in line]
     pirellone = []
@@ -14,6 +12,10 @@ def random_pirellone(n, m, solvable=False):
             pirellone.append(line[:])
         else:
             pirellone.append(inv[:])
+    if not solvable:
+        row = random.randint(1, m)
+        col = random.randint(1, n)
+        pirellone[row][col] = 1-pirellone[row][col]
     return pirellone
 
 

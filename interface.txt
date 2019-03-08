@@ -1,21 +1,28 @@
-function is_solvable(m, n) callbacks {
-   function is_on(row, col);
-}
+function is_solvable(M, N, P[][]);
 
-procedure solve(m, n) callbacks {
-    function is_on(row, col);
-    procedure switch_row(row);
-    procedure switch_col(col);
+procedure solve(M, N, P[][]) callbacks {
+    procedure switch_row(i);
+    procedure switch_col(j);
 }
 
 main {
     read choice;
     if choice {
-        read m, n;
-        call res = is_solvable(m, n);
+        read M, N;
+        for i to M {
+            for j to N {
+                read P[i][j];
+            }
+        }
+        call res = is_solvable(M, N, P);
         write res;
     } else {
-        read m, n;
-        call solve(m, n);
+        read M, N;
+        for i to M {
+            for j to N {
+                read P[i][j];
+            }
+        }
+        call solve(M, N, P);
     }
 }

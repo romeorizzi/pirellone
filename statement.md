@@ -28,19 +28,20 @@ agire. Altrimenti, segnala la situazione di impossibilità.
 
 Per risolvere il problema, dovrai implementare le seguenti due funzioni.
 
-#### `is_solvable(m, n, is_on(row, col))`
+#### `is_solvable(N, M, P[][])`
 
-Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `m`x`n` sia risolvibile, `false` altrimenti. 
-Hai a disposizione la callback `is_on(row, col)`, la quale resituisce `true` se la luce corrispondente alla finestra 
-(`row`, `col`) del pirellone è attualmente accesa, `false` altrimenti.
+Questa funzione dovrà restituire `1` se e solo se il Pirellone di dimensione `M`x`N` è risolvibile, altrimenti dovrà 
+restituire `0`. 
+La matrice `P` rappresenta il Pirellone corrente, dove per ogni `i` e `j` tali che `1 <= i <= M` e `1 <= j <= N` 
+`P[i][j] = 1` se e solo se la finestra in posizione `i, j` è illuminata. 
 
-#### `solve(m, n, is_one(row, col), switch_row(row), switch_col(col))`
+#### `solve(M, N, P, switch_row(row), switch_col(col))`
 
-Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `m` ed `n` indicano la dimensione del 
-grattacielo, e la callback `is_on(row, col)` ci dice se in quel momento una finestra è illuminata o meno. Chiaramente assumiamo
-che il grattacielo passato a questa funzione ammetta sempre una soluzione. 
+Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, i parametnri `M`, `N`, e `P` 
+rappresentano il Pirellone. Chiaramente assumiamo in questa face che il grattacielo datoci ammetta una soluzione. 
 
-Hai a disposizione le callback `switch_row(row)` e `switch_col(col)`, che rispettivamente azionano l'interruttore di riga e di colonna indicato. Il tuo obbiettivo è chiamare queste funzioni per spegnere tutte le luci del pirellone, chiaramente facendo 
+Hai a disposizione le callback `switch_row(i)` e `switch_col(j)`, che rispettivamente azionano l'interruttore 
+di riga e di colonna indicato. Il tuo obbiettivo è chiamare queste funzioni per spegnere tutte le luci del pirellone, chiaramente facendo 
 il minor numero di operazioni possibili. 
 
 **NB**: sebbene ti venga chiesto di implementare le funzioni in un singolo file, fra la valutazione di un goal e l'altro il
@@ -55,5 +56,3 @@ Questo problema prevede i seguenti goal, obbiettivi che dovrai raggiungere:
 - `decision_exponential`: decidere se il Pirellone sia spegnibile o meno, con M,N <= 10
 - `solve_exponential`: qualora esista, dara una sequenza di mosse che spenga l'intero Pirellone, con M,N <= 10
 - `decision_quadratic` e `solve_exponential`: rispettivamente come i primi due, ma con M,N <= 100
-- `solve_minimum_reads`: implementa la procedura `solve()` effettuando il minor numero possibile di chiamate a `is_on`
-- `decision_no_double_read` e `solve_no_double_read`: implementa le relative funzioni senza chiamare due volte `is_on` con gli stessi parametri

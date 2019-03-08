@@ -47,17 +47,8 @@ def eval_is_solvable(n, m, solvable=False):
     print(f"Checking if solvable {n}x{m}")
     pirellone = random_pirellone(n, m, solvable=solvable)
 
-    read = [[False for j in range(m + 1)] for i in range(n + 1)]
-    def is_on(i, j):
-        if read[i][j]:
-            ta.goals["decision_no_double_read"] = False
-        read[i][j] = True
-        p.check(1 <= i <= n, "row index out of range")
-        p.check(1 <= j <= m, "column index out of range")
-        return pirellone[i - 1][j - 1]
-
     with ta.run_algorithm(ta.submission.source) as p:
-        res = bool(p.functions.is_solvable(n, m, callbacks=[is_on]))
+        res = bool(p.functions.is_solvable(n, m, pirellone))
          
     solvable = is_solvable(pirellone, n, m)
     if res == solvable:
@@ -73,38 +64,24 @@ def eval_is_solvable(n, m, solvable=False):
     send_pirellone_file(pirellone)
     return False
 
+
 def eval_solve(n, m):
     print(f"Getting solution for {n}x{m}")
 
     pirellone = random_pirellone(n, m, solvable=True)
 
-    count = 0
-    read = [[False for j in range(m + 1)] for i in range(n + 1)]
-    def is_on(i, j):
-        nonlocal count 
-        if read[i][j]:
-            ta.goals["solve_no_double_read"] = False
-        read[i][j] = True
-
-        count += 1
-        if count > n + m - 1:
-            ta.goals["solve_minimum_reads"] = False
-        p.check(1 <= i <= n, "row index out of range")
-        p.check(1 <= j <= m, "column index out of range")
-        return pirellone[i - 1][j - 1]
-
     def switch_row(i):
-        i -= 1
+        p.check(0 <= i < m, f"Indice di riga i = {i} non compreso nel range [0, {n})!")
         for j in range(m):
             pirellone[i][j] = int(not pirellone[i][j])
 
     def switch_col(j):
-        j -= 1
+        p.check(0 <= j < n, f"Indice di riga j = {j} non compreso nel range [0, {m})!")
         for i in range(n):
             pirellone[i][j] = int(not pirellone[i][j])
  
     with ta.run_algorithm(ta.submission.source) as p:
-        p.procedures.solve(n, m, callbacks=[is_on, switch_row, switch_col])
+        p.procedures.solve(n, m, pirellone, callbacks=[switch_row, switch_col])
 
     solved = not any(any(pirellone[i][j] for j in range(m)) for i in range(n))
     if not solved:
@@ -136,11 +113,6 @@ def main():
     ta.goals.setdefault("solve_exponential", True)
     ta.goals.setdefault("decision_quadratic", True)
     ta.goals.setdefault("solve_quadratic", True)
-    ta.goals.setdefault("solve_minimum_reads", True)
-    ta.goals.setdefault("decision_no_double_read", True)
-    ta.goals.setdefault("solve_no_double_read", True)
-
-    print(ta.goals)
 
 
 if __name__ == "__main__":

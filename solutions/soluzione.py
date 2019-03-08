@@ -1,5 +1,4 @@
-def is_solvable(m, n, is_on):
-    P = [[is_on(i, j) for j in range(1, m + 1)] for i in range(1, n + 1)]
+def is_solvable(m, n, P):
     first = P[0]
     inv = [int(not x) for x in first]
     for line in P:
@@ -9,10 +8,10 @@ def is_solvable(m, n, is_on):
     return True
 
 
-def solve(m, n, is_on, switch_row, switch_col):
-    for j in range(1, n + 1):
-        if is_on(1, j):
+def solve(m, n, P, switch_row, switch_col):
+    for j in range(n):
+        if P[0][j]:
             switch_col(j)
-    for i in range(2, m + 1):
-        if is_on(i, 1):
+    for i in range(1, m):
+        if P[i][0] != P[0][0]:
             switch_row(i)

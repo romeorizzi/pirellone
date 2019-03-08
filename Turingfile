@@ -7,7 +7,4 @@ goals = [
     "solve_exponential",
     "decision_quadratic",
     "solve_quadratic",
-    "solve_minimum_reads",
-    "decision_no_double_read",
-    "solve_no_double_read",
 ]

@@ -1,23 +1,23 @@
 class Solution extends Skeleton {
 
-    int is_solvable(int m, int n, Is_solvableCallbacks cb) {
+    int is_solvable(int m, int n, int[][] P) {
         int[] first = new int[n + 1];
         int[] inv = new int[n + 1];
         
-        for (int j = 1; j <= n; j++) {
-            first[j] = cb.is_on(1, j);
+        for (int j = 0; j < n; j++) {
+            first[j] = P[0][j];
             inv[j] = first[j] == 1 ? 0 : 1;
         }
 
-        for (int i = 2; i <= m; i++) {
-            if (cb.is_on(i, 1) == first[1]) {
-                for (int j = 2; j <= n; j++) {
-	                if (cb.is_on(i, j) != first[j])
+        for (int i = 1; i < m; i++) {
+            if (P[i][0] == first[0]) {
+                for (int j = 0; j < n; j++) {
+	                if (P[i][j] != first[j])
 	                    return 0;
                 }
             } else {
-                for (int j = 2; j <= n; j++) {
-	                if (cb.is_on(i, j) != inv[j])
+                for (int j = 0; j < n; j++) {
+	                if (P[i][j] != inv[j])
 	                    return 0;
                 }
             }
@@ -25,12 +25,12 @@ class Solution extends Skeleton {
         return 1;
     }
     
-    void solve(int n, int m, SolveCallbacks cb) {
-        for (int j = 1; j <= n; j++)
-            if (cb.is_on(1, j) == 1)
+    void solve(int n, int m, int[][] P, SolveCallbacks cb) {
+        for (int j = 0; j < n; j++)
+            if (P[0][j] == 1)
                 cb.switch_col(j);
-        for(int i = 2; i <= m; i++)
-            if(cb.is_on(i, 1) == 1)
+        for(int i = 1; i < m; i++)
+            if(P[i][0] != P[0][0])
                 cb.switch_row(i);
     }
 }

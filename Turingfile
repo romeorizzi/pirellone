@@ -1,3 +1,6 @@
+[problem]
+title = "Luci al Pirellone"
+
 [scoring]
 goals = [
     "decision_exponential",

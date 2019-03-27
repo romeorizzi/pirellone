@@ -36,7 +36,7 @@ Questa funzione riceve in input una matrice `P` di `M` righe ed `N` colonne, dov
 #### `solve(M, N, P[][], switch_row(row), switch_col(col))`
 
 Questa procedura computa e comunica al custode una sequenza di azioni utili allo spegnimento del Pirellone.
-I grattacieli passati a questa funzione ammettono sempre una soluzione.
+I grattacieli passati a questa procedura ammettono sempre una soluzione.
 Analogamente a prima, `M` ed `N` indicano la dimensione del grattacielo, mentre `P` descrive la situazione iniziale di ciascuna finestra.
 Per comunicare al custode le azioni da effettuare, devi avvalerti delle procedure di callback `switch_row(row)` e `switch_col(col)`,
 che suggeriscono di agire sull'interruttore, rispettivamente di riga e di colonna, indicato.

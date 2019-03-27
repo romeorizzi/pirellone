@@ -28,20 +28,18 @@ agire. Altrimenti, segnala la situazione di impossibilità.
 
 Per risolvere il problema, dovrai implementare le seguenti due funzioni.
 
-#### `is_solvable(m, n, is_on(row, col))`
+#### `is_solvable(N, M, is_on(row, col))`
 
-Questa funzione dovrà restituire `true` nel caso il Pirellone di dimensione `m`x`n` sia risolvibile, `false` altrimenti. 
-Hai a disposizione la callback `is_on(row, col)`, la quale resituisce `true` se la luce corrispondente alla finestra 
-(`row`, `col`) del pirellone è attualmente accesa, `false` altrimenti.
+Questa funzione dovrà restituire `1` se e solo se il Pirellone di dimensione `M`x`N` è risolvibile, altrimenti dovrà 
+restituire `0`.
+Per conoscere lo stato attuale delle finestra sulla riga `row` e colonna `col` devi chiamare la funzione di callback `is_on(row, col)` che restituisce `1` se la luce è accesa e `0` se spenta.
 
-#### `solve(m, n, is_one(row, col), switch_row(row), switch_col(col))`
+#### `solve(M, N, is_on(row, col), switch_row(row), switch_col(col))`
 
-Questa procedura computa una soluzione al problema pirellone. Analogamente a prima, `m` ed `n` indicano la dimensione del 
-grattacielo, e la callback `is_on(row, col)` ci dice se in quel momento una finestra è illuminata o meno. Chiaramente assumiamo
-che il grattacielo passato a questa funzione ammetta sempre una soluzione. 
-
-Hai a disposizione le callback `switch_row(row)` e `switch_col(col)`, che rispettivamente azionano l'interruttore di riga e di colonna indicato. Il tuo obbiettivo è chiamare queste funzioni per spegnere tutte le luci del pirellone, chiaramente facendo 
-il minor numero di operazioni possibili. 
+I grattacieli passati a questa procedura ammettono sempre una soluzione, e essa si occupa appunto di spegnerli.
+Come per la funzione precedente, il Pirellone è reso accessibile tramite i parametnri `M` ed `N` che ne specificano le dimensioni e tramite la funzione di callback `is_on(row, col)` che riporta lo stato di ogni singola finestra.
+Per spegnere il Pirellone hai a disposizione le callback `switch_row(i)` e `switch_col(j)`, che rispettivamente azionano l'interruttore 
+di riga e di colonna indicato.
 
 **NB**: sebbene ti venga chiesto di implementare le funzioni in un singolo file, fra la valutazione di un goal e l'altro il
 processo viene interrotto. Non funzionerà in sostanza definire variabili globali per condividere dati fra le 
